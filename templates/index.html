@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>TiendaRopaEC</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>TiendaRopaEC 👕</h1>
+        <p>Ropa cómoda a un clic de distancia</p>
+    </header>
+
+    <main>
+        <div class="grid">
+            {% for producto in productos %}
+            <a class="card" href="{{ url_for('detalle_producto', producto_id=producto.id) }}">
+                <h3>{{ producto.nombre }}</h3>
+                <p class="categoria">{{ producto.categoria }}</p>
+                <p class="precio">${{ "%.2f"|format(producto.precio) }}</p>
+                <p class="stock">Stock: {{ producto.stock }}</p>
+            </a>
+            {% else %}
+            <p>No hay productos disponibles todavía.</p>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer>
+        <p>Proyecto Final · Cloud Computing · Desplegado en Azure App Service</p>
+    </footer>
+</body>
+</html>
