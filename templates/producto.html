@@ -7,14 +7,14 @@
 </head>
 <body>
     <header>
-        <h1>TiendaRopaEC 👕</h1>
+        <p class="wordmark">TiendaRopaEC 👕</p>
     </header>
 
     <main>
         <a class="volver" href="{{ url_for('home') }}">← Volver a la tienda</a>
-        <div class="detalle">
+        <div class="detalle" data-cat="{{ producto.categoria }}">
+            <p class="categoria">{{ producto.categoria }}</p>
             <h2>{{ producto.nombre }}</h2>
-            <p class="categoria">Categoría: {{ producto.categoria }}</p>
             <p class="precio">${{ "%.2f"|format(producto.precio) }}</p>
             <p class="stock">Disponibles: {{ producto.stock }} unidades</p>
         </div>

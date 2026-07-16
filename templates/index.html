@@ -7,16 +7,16 @@
 </head>
 <body>
     <header>
-        <h1>TiendaRopaEC 👕</h1>
-        <p>Ropa cómoda a un clic de distancia</p>
+        <p class="wordmark">TiendaRopaEC 👕</p>
+        <p class="tagline">Ropa cómoda · Hecha etiqueta por etiqueta</p>
     </header>
 
     <main>
         <div class="grid">
             {% for producto in productos %}
-            <a class="card" href="{{ url_for('detalle_producto', producto_id=producto.id) }}">
-                <h3>{{ producto.nombre }}</h3>
+            <a class="card" data-cat="{{ producto.categoria }}" href="{{ url_for('detalle_producto', producto_id=producto.id) }}">
                 <p class="categoria">{{ producto.categoria }}</p>
+                <h3>{{ producto.nombre }}</h3>
                 <p class="precio">${{ "%.2f"|format(producto.precio) }}</p>
                 <p class="stock">Stock: {{ producto.stock }}</p>
             </a>

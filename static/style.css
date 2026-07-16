@@ -1,61 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root {
+    --paper: #F2ECDD;
+    --ink: #1E2438;
+    --thread: #FFFDF8;
+    --line: #D8CEB4;
+
+    --marigold: #E8A33D;
+    --teal: #2F6F6D;
+    --clay: #B6472F;
+    --plum: #6B4577;
+}
+
 * { box-sizing: border-box; }
 
 body {
-    font-family: -apple-system, Segoe UI, Roboto, sans-serif;
+    font-family: 'Inter', -apple-system, Segoe UI, Roboto, sans-serif;
     margin: 0;
-    background: #f7f5f2;
-    color: #2b2b2b;
+    background: var(--paper);
+    color: var(--ink);
+    background-image:
+        repeating-linear-gradient(90deg, rgba(30,36,56,0.035) 0 1px, transparent 1px 48px);
 }
 
 header {
-    background: #22314f;
-    color: white;
-    padding: 32px 24px;
+    background: var(--ink);
+    color: var(--thread);
+    padding: 48px 24px 40px;
     text-align: center;
+    border-bottom: 6px solid var(--marigold);
 }
 
-header h1 { margin: 0 0 8px 0; }
+header .wordmark {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 2.4rem;
+    letter-spacing: -0.02em;
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+header .tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.72rem;
+    color: var(--marigold);
+    margin: 14px 0 0 0;
+}
 
 main {
-    max-width: 900px;
-    margin: 32px auto;
+    max-width: 980px;
+    margin: 44px auto;
     padding: 0 20px;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 26px;
 }
 
+/* --- Tarjeta estilo "etiqueta de ropa" --- */
 .card {
-    background: white;
-    border-radius: 10px;
-    padding: 18px;
+    --accent: var(--ink);
+    position: relative;
+    background: var(--thread);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 22px 20px 20px;
     text-decoration: none;
     color: inherit;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    transition: transform 0.15s ease;
+    box-shadow: 0 1px 0 rgba(30,36,56,0.05);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.card:hover { transform: translateY(-4px); }
+.card::before {
+    /* hueco de cordón de la etiqueta */
+    content: "";
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+}
 
-.categoria { color: #777; font-size: 0.9em; }
-.precio { font-weight: bold; font-size: 1.2em; color: #22314f; }
-.stock { font-size: 0.85em; color: #999; }
+.card::after {
+    /* línea perforada bajo el hueco */
+    content: "";
+    position: absolute;
+    top: 34px;
+    left: 0;
+    right: 0;
+    border-top: 1.5px dashed var(--line);
+}
 
-.volver { display: inline-block; margin-bottom: 20px; color: #22314f; }
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(30,36,56,0.12);
+}
+
+.card[data-cat="Camisetas"] { --accent: var(--marigold); }
+.card[data-cat="Pantalones"] { --accent: var(--teal); }
+.card[data-cat="Chompas"] { --accent: var(--clay); }
+.card[data-cat="Vestidos"] { --accent: var(--plum); }
+
+.card .categoria {
+    margin: 22px 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.68rem;
+    color: #6b6455;
+}
+
+.card .categoria::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+}
+
+.card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    margin: 0 0 14px;
+    line-height: 1.25;
+}
+
+.precio {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--ink);
+    margin: 0 0 4px;
+}
+
+.stock {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    color: #948c78;
+    margin: 0;
+}
+
+.volver {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 24px;
+    color: var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 2px;
+}
+
+.volver:hover { border-color: var(--ink); }
 
 .detalle {
-    background: white;
-    padding: 28px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    position: relative;
+    background: var(--thread);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 40px 36px 32px;
+    max-width: 420px;
+}
+
+.detalle::before {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: 20px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 1.5px solid var(--line);
+}
+
+.detalle::after {
+    content: "";
+    position: absolute;
+    top: 42px;
+    left: 0;
+    right: 0;
+    border-top: 1.5px dashed var(--line);
+}
+
+.detalle h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.7rem;
+    margin: 26px 0 18px;
+}
+
+.detalle .categoria {
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.7rem;
+    color: #6b6455;
+    margin: 0 0 18px;
+}
+
+.detalle .precio {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+}
+
+.detalle .stock {
+    font-size: 0.85rem;
 }
 
 footer {
     text-align: center;
-    padding: 24px;
-    color: #999;
-    font-size: 0.85em;
+    padding: 30px 20px 40px;
+    color: #948c78;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
 }
