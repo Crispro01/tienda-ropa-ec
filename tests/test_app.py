@@ -29,7 +29,7 @@ def test_home_page_carga(client):
 def test_home_page_contiene_titulo(client):
     """La página principal debe mostrar el nombre de la tienda."""
     response = client.get("/")
-    assert "TiendaRopaEC".encode() in response.data
+    assert "CSP".encode() in response.data
 
 
 def test_endpoint_salud_responde_ok(client):
