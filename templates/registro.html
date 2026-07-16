@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Crear cuenta · CSP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="topbar">
+        <div class="topbar-inner">
+            <span class="brand-mini">CSP</span>
+            <div class="auth-links">
+                <a href="{{ url_for('login') }}">Iniciar sesión</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="auth-wrap">
+        <div class="auth-card">
+            <h2>Crear cuenta</h2>
+            <p class="auth-sub">Regístrate en CSP · Cool Shop Pay</p>
+
+            {% if error %}
+            <div class="auth-error">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST" action="{{ url_for('registro') }}">
+                <div class="field">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" name="nombre" value="{{ nombre or '' }}" required>
+                </div>
+                <div class="field">
+                    <label for="correo">Correo</label>
+                    <input type="email" id="correo" name="correo" value="{{ correo or '' }}" required>
+                </div>
+                <div class="field">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" value="{{ telefono or '' }}">
+                </div>
+                <div class="field">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" minlength="6" required>
+                </div>
+                <button type="submit" class="auth-submit">Crear cuenta</button>
+            </form>
+
+            <p class="auth-footer">¿Ya tienes cuenta? <a href="{{ url_for('login') }}">Inicia sesión</a></p>
+        </div>
+    </div>
+</body>
+</html>

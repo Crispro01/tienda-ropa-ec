@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi perfil · CSP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="topbar">
+        <div class="topbar-inner">
+            <span class="brand-mini">CSP</span>
+            <div class="auth-links">
+                <a href="{{ url_for('home') }}">Volver a la tienda</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="auth-wrap">
+        <div class="perfil-card">
+            <div class="perfil-avatar">{{ usuario.nombre[0]|upper }}</div>
+            <h2>{{ usuario.nombre }}</h2>
+            <p class="perfil-correo">{{ usuario.correo }}</p>
+
+            <div class="perfil-datos">
+                <div class="perfil-dato">
+                    <span>Correo</span>
+                    <span>{{ usuario.correo }}</span>
+                </div>
+                <div class="perfil-dato">
+                    <span>Teléfono</span>
+                    <span>{{ usuario.telefono or 'No registrado' }}</span>
+                </div>
+            </div>
+
+            <a href="{{ url_for('logout') }}" class="perfil-logout">Cerrar sesión</a>
+        </div>
+    </div>
+</body>
+</html>
